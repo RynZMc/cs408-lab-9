@@ -18,6 +18,7 @@ function randomRGB() {
   return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
 }
 
+//Parent class for Ball and EvilCircle
 class Shape {
   constructor(x, y, velX, velY) {
     this.x = x;
@@ -83,7 +84,8 @@ class EvilCircle extends Shape{
     super(x, y, 20, 20);
     this.color = 'white';
     this.size = 10;
-
+    
+    // set keys to false (up)
     this.keys = {
       a: false,
       d: false,
@@ -91,12 +93,14 @@ class EvilCircle extends Shape{
       s: false
     };
 
+    // when key is pressed down, activate.
     window.addEventListener("keydown", (e) => {
       if (this.keys.hasOwnProperty(e.key)) {
         this.keys[e.key] = true; 
       }
     });
 
+    // when key is unpressed, deactivate.
     window.addEventListener("keyup", (e) => {
       if (this.keys.hasOwnProperty(e.key)) {
         this.keys[e.key] = false;
@@ -130,6 +134,7 @@ class EvilCircle extends Shape{
     }
   }
 
+  // update position of evilcircle based on keypresses
   updatePosition() {
     if (this.keys.a) this.x -= this.velX;
     if (this.keys.d) this.x += this.velX;
