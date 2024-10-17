@@ -84,22 +84,20 @@ class EvilCircle extends Shape{
     this.color = 'white';
     this.size = 10;
 
-    this.keys = {
-      a: false,
-      d: false,
-      w: false,
-      s: false
-    };
-
     window.addEventListener("keydown", (e) => {
-      if (this.keys.hasOwnProperty(e.key)) {
-        this.keys[e.key] = true; 
-      }
-    });
-
-    window.addEventListener("keyup", (e) => {
-      if (this.keys.hasOwnProperty(e.key)) {
-        this.keys[e.key] = false;
+      switch (e.key) {
+        case "a":
+          this.x -= this.velX;
+          break;
+        case "d":
+          this.x += this.velX;
+          break;
+        case "w":
+          this.y -= this.velY;
+          break;
+        case "s":
+          this.y += this.velY;
+          break;
       }
     });
   }
@@ -128,13 +126,6 @@ class EvilCircle extends Shape{
     if (this.y - this.size <= 0) {
       this.y = this.size;
     }
-  }
-
-  updatePosition() {
-    if (this.keys.a) this.x -= this.velX;
-    if (this.keys.d) this.x += this.velX;
-    if (this.keys.w) this.y -= this.velY;
-    if (this.keys.s) this.y += this.velY;
   }
 
   collisionDetect() {
@@ -196,7 +187,6 @@ function loop() {
     }
   }
 
-  evilCircle.updatePosition();
   evilCircle.draw();
   evilCircle.checkBounds();
   evilCircle.collisionDetect();
